@@ -1,19 +1,28 @@
 import 'dart:async';
+import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:healthy01/screens/home_screen.dart';
 import 'package:healthy01/screens/login.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class OnboardingSecondScreen extends StatefulWidget {
+  const OnboardingSecondScreen({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _loginScreenState();
+  State<OnboardingSecondScreen> createState() => _onboardingSecondScreenState();
 }
 
-class _loginScreenState extends State<LoginScreen> {
+class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  static const List<String> list = <String>[
+    'Your activity lavel',
+    'Two',
+    'Three',
+    'Four'
+  ];
+  bool isChecked = false;
+  bool isCheckedw = false;
   @override
   void initState() {
     super.initState();
@@ -22,6 +31,7 @@ class _loginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    String dropdownValue = list.first;
     var textField = TextField(
       controller: usernameController,
       decoration: InputDecoration(
@@ -37,27 +47,25 @@ class _loginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(32.5),
+        padding: EdgeInsets.all(32.5),
         child: ListView(
           children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.1,
-            ),
             Container(
               height: 213,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/images/login.png'),
+                  image: AssetImage('assets/images/home1.png'),
                 ),
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.05,
+              height: MediaQuery.of(context).size.height * 0.02,
             ),
             const Text(
-              'Welcome To Healthy APP',
+              'Welcome To Healthy',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 20,
@@ -69,7 +77,7 @@ class _loginScreenState extends State<LoginScreen> {
               height: MediaQuery.of(context).size.height * 0.01,
             ),
             const Text(
-              'We Help users to have a healthy lifestyle',
+              'Following details will help us to estimate\nyour daily calorie needs',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
@@ -80,90 +88,146 @@ class _loginScreenState extends State<LoginScreen> {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.02,
             ),
-            Container(
-              height: 50,
-              alignment: Alignment.center,
-              //margin: EdgeInsets.symmetric(horizontal: 50),
-              child: textField,
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.005,
-            ),
-            Container(
-              height: 50,
-              alignment: Alignment.center,
-              //margin: EdgeInsets.symmetric(horizontal: 50),
-              child: TextField(
-                controller: passwordController,
-                decoration: InputDecoration(
-                  labelText: "Password",
-                  filled: true, //<-- SEE HERE
-                  fillColor: Color.fromARGB(255, 253, 234, 229),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: BorderSide(
-                      color: Color.fromARGB(255, 253, 116, 98),
-                      width: 5.0,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    child: CheckboxListTile(
+                      checkColor: Colors.white,
+                      activeColor: const Color.fromARGB(227, 207, 19, 19),
+                      title: const Text("Man"),
+                      value: isChecked,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          isChecked = value!;
+                        });
+                      },
                     ),
                   ),
                 ),
-                obscureText: true,
-              ),
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    child: CheckboxListTile(
+                      checkColor: Colors.white,
+                      activeColor: const Color.fromARGB(227, 207, 19, 19),
+                      title: const Text("Woman"),
+                      value: isCheckedw,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          isCheckedw = value!;
+                        });
+                      },
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+              ],
             ),
-            Container(
-              alignment: Alignment.center,
-              margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-              // ignore: prefer_const_constructors
-              child: Text(
-                "Forget your password?",
-                // ignore: prefer_const_constructors
-                style: TextStyle(
-                    fontFamily: 'Montserrat Regular',
-                    fontSize: 15,
-                    color: Color.fromARGB(255, 230, 78, 78)),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.01,
+            ),
+            Row(children: [
+              Expanded(
+                child: Container(
+                  width: double.infinity,
+                  height: 50,
+                  alignment: Alignment.center,
+                  //margin: EdgeInsets.symmetric(horizontal: 50),
+                  child: TextField(
+                    controller: passwordController,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.done),
+                      labelText: "Height",
+                      filled: true, //<-- SEE HERE
+                      fillColor: const Color.fromARGB(255, 253, 234, 229),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 253, 116, 98),
+                          width: 5.0,
+                        ),
+                      ),
+                    ),
+                    obscureText: true,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  width: double.infinity,
+                  height: 50,
+                  alignment: Alignment.center,
+                  //margin: EdgeInsets.symmetric(horizontal: 50),
+                  child: TextField(
+                    controller: passwordController,
+                    decoration: InputDecoration(
+                      labelText: "Weight",
+                      filled: true, //<-- SEE HERE
+                      fillColor: const Color.fromARGB(255, 253, 234, 229),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: const BorderSide(
+                          color: Color.fromARGB(255, 253, 116, 98),
+                          width: 5.0,
+                        ),
+                      ),
+                    ),
+                    obscureText: true,
+                  ),
+                ),
+              ),
+            ]),
+            SizedBox(height: size.height * 0.03),
+            DropdownButton<String>(
+              value: dropdownValue,
+              icon: const Icon(Icons.arrow_downward),
+              elevation: 16,
+              style: const TextStyle(color: Colors.deepPurple),
+              underline: Container(
+                height: 2,
+                color: Colors.deepPurpleAccent,
+              ),
+              onChanged: (String? value) {
+                // This is called when the user selects an item.
+                setState(() {
+                  dropdownValue = value!;
+                });
+              },
+              items: list.map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+            SizedBox(height: size.height * 0.03),
+            const Text(
+              'Your data is only stored on this device \nand it only accesible to this app',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 16,
+                color: Color(0xff9A9DB0),
+                fontWeight: FontWeight.w400,
               ),
             ),
             SizedBox(height: size.height * 0.05),
-            Container(
-                height: 50,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(26.5),
-                  gradient: const LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color(0xFFf6925c),
-                      Color(0xFFf37552),
-                    ],
-                  ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Ink(
+                decoration: const ShapeDecoration(
+                  color: Color(0xFFf37552),
+                  shape: CircleBorder(),
                 ),
-                child: Center(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      elevation: 5,
-                      backgroundColor: Colors.transparent,
-                      shadowColor: Colors.transparent,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const LoginScreen()),
-                      );
-                    },
-                    child: const Text(
-                      'Sign In',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                )),
+                child: IconButton(
+                  icon: const Icon(Icons.navigate_next),
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  onPressed: () {},
+                ),
+              ),
+            ),
           ],
         ),
       ),

@@ -24,6 +24,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         padding: const EdgeInsets.all(40),
         child: ListView(
           children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.05,
+            ),
             Container(
               height: 213,
               decoration: const BoxDecoration(

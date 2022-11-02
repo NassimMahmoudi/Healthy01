@@ -98,11 +98,11 @@ class _loginScreenState extends State<LoginScreen> {
                 decoration: InputDecoration(
                   labelText: "Password",
                   filled: true, //<-- SEE HERE
-                  fillColor: Color.fromARGB(255, 253, 234, 229),
+                  fillColor: const Color.fromARGB(255, 253, 234, 229),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                     borderSide: BorderSide(
-                      color: Color.fromARGB(255, 253, 116, 98),
+                      color: const Color.fromARGB(255, 253, 116, 98),
                       width: 5.0,
                     ),
                   ),

@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:healthy01/screens/home_screen.dart';
 
+import 'onboarding_screen.dart';
+import 'onboarding_second_screen.dart';
+
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
@@ -239,7 +242,8 @@ class _registerScreenState extends State<RegisterScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const RegisterScreen()),
+                            builder: (context) =>
+                                const OnboardingSecondScreen()),
                       );
                     },
                     child: const Text(
