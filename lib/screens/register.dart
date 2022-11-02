@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:healthy01/screens/home_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -11,6 +12,13 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _registerScreenState extends State<RegisterScreen> {
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController ageController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  bool isChecked = false;
+
   @override
   void initState() {
     super.initState();
@@ -24,18 +32,18 @@ class _registerScreenState extends State<RegisterScreen> {
         child: ListView(
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.1,
+              height: MediaQuery.of(context).size.height * 0.01,
             ),
             Container(
               height: 213,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/images/food2.png'),
+                  image: AssetImage('assets/images/register.png'),
                 ),
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.05,
+              height: MediaQuery.of(context).size.height * 0.01,
             ),
             const Text(
               'Welcome To Healthy APP \n We Help users to have a healthy lifestyle',
@@ -50,7 +58,7 @@ class _registerScreenState extends State<RegisterScreen> {
               height: MediaQuery.of(context).size.height * 0.01,
             ),
             const Text(
-              'Ease of monitoring health status.',
+              'Ease of monitoring health status',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
@@ -59,7 +67,150 @@ class _registerScreenState extends State<RegisterScreen> {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.1,
+              height: MediaQuery.of(context).size.height * 0.01,
+            ),
+            Container(
+              height: 50,
+              alignment: Alignment.center,
+              //margin: EdgeInsets.symmetric(horizontal: 50),
+              child: TextField(
+                controller: usernameController,
+                decoration: InputDecoration(
+                  labelText: "Username",
+                  filled: true, //<-- SEE HERE
+                  fillColor: Color.fromARGB(255, 253, 234, 229),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 253, 116, 98),
+                      width: 5.0,
+                    ),
+                  ),
+                ),
+                obscureText: false,
+              ),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.01,
+            ),
+            Container(
+              height: 50,
+              alignment: Alignment.center,
+              //margin: EdgeInsets.symmetric(horizontal: 50),
+              child: TextField(
+                controller: emailController,
+                decoration: InputDecoration(
+                  labelText: "Email",
+                  filled: true, //<-- SEE HERE
+                  fillColor: Color.fromARGB(255, 253, 234, 229),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 253, 116, 98),
+                      width: 5.0,
+                    ),
+                  ),
+                ),
+                obscureText: false,
+              ),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.01,
+            ),
+            Container(
+              height: 50,
+              alignment: Alignment.center,
+              //margin: EdgeInsets.symmetric(horizontal: 50),
+              child: TextField(
+                controller: passwordController,
+                decoration: InputDecoration(
+                  labelText: "Password",
+                  filled: true, //<-- SEE HERE
+                  fillColor: Color.fromARGB(255, 253, 234, 229),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 253, 116, 98),
+                      width: 5.0,
+                    ),
+                  ),
+                ),
+                obscureText: true,
+              ),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.01,
+            ),
+            Container(
+              height: 50,
+              alignment: Alignment.center,
+              //margin: EdgeInsets.symmetric(horizontal: 50),
+              child: TextField(
+                controller: phoneController,
+                keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.digitsOnly
+                ],
+                decoration: InputDecoration(
+                  labelText: "Phone",
+                  filled: true, //<-- SEE HERE
+                  fillColor: Color.fromARGB(255, 253, 234, 229),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 253, 116, 98),
+                      width: 5.0,
+                    ),
+                  ),
+                ),
+                obscureText: false,
+              ),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.01,
+            ),
+            Container(
+              height: 50,
+              alignment: Alignment.center,
+              //margin: EdgeInsets.symmetric(horizontal: 50),
+              child: TextField(
+                controller: ageController,
+                keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.digitsOnly
+                ],
+                decoration: InputDecoration(
+                  labelText: "Age",
+                  filled: true, //<-- SEE HERE
+                  fillColor: Color.fromARGB(255, 253, 234, 229),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide(
+                      color: Color.fromARGB(255, 253, 116, 98),
+                      width: 5.0,
+                    ),
+                  ),
+                ),
+                obscureText: false,
+              ),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.01,
+            ),
+            CheckboxListTile(
+              checkColor: Colors.white,
+              activeColor: Color.fromARGB(227, 207, 19, 19),
+              title: const Text(
+                  "I agree with terms conditions and privacy policy"),
+              value: isChecked,
+              onChanged: (bool? value) {
+                setState(() {
+                  isChecked = value!;
+                });
+              },
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.01,
             ),
             Container(
                 height: 50,
