@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class OnboardingSecondScreen extends StatefulWidget {
   const OnboardingSecondScreen({Key? key}) : super(key: key);
@@ -75,6 +76,11 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
                 Expanded(
                   child: Container(
                     width: double.infinity,
+                    decoration: BoxDecoration(
+                      border:
+                          Border.all(color: Color.fromARGB(255, 255, 188, 179)),
+                      borderRadius: BorderRadius.circular(20),
+                    ), //BoxDecoration//BoxDecoration
                     child: CheckboxListTile(
                       checkColor: Colors.white,
                       activeColor: const Color.fromARGB(227, 207, 19, 19),
@@ -90,11 +96,16 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.02,
+                  height: MediaQuery.of(context).size.width * 0.10,
                 ),
                 Expanded(
                   child: Container(
                     width: double.infinity,
+                    decoration: BoxDecoration(
+                      border:
+                          Border.all(color: Color.fromARGB(255, 255, 200, 193)),
+                      borderRadius: BorderRadius.circular(20),
+                    ), //BoxDecoration
                     child: CheckboxListTile(
                       checkColor: Colors.white,
                       activeColor: const Color.fromARGB(227, 207, 19, 19),
@@ -113,7 +124,7 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
               ],
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.01,
+              height: MediaQuery.of(context).size.height * 0.03,
             ),
             Row(children: [
               Expanded(
@@ -124,8 +135,14 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
                   //margin: EdgeInsets.symmetric(horizontal: 50),
                   child: TextField(
                     controller: heightController,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
                     decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.done),
+                      prefixIcon: const Icon(
+                        Icons.height,
+                      ),
                       labelText: "Height",
                       filled: true, //<-- SEE HERE
                       fillColor: const Color.fromARGB(255, 253, 234, 229),
@@ -137,7 +154,7 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
                         ),
                       ),
                     ),
-                    obscureText: true,
+                    obscureText: false,
                   ),
                 ),
               ),
@@ -149,7 +166,14 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
                   //margin: EdgeInsets.symmetric(horizontal: 50),
                   child: TextField(
                     controller: weightController,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
                     decoration: InputDecoration(
+                      prefixIcon: const Icon(
+                        Icons.monitor_weight,
+                      ),
                       labelText: "Weight",
                       filled: true, //<-- SEE HERE
                       fillColor: const Color.fromARGB(255, 253, 234, 229),
@@ -161,7 +185,7 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
                         ),
                       ),
                     ),
-                    obscureText: true,
+                    obscureText: false,
                   ),
                 ),
               ),
@@ -171,14 +195,14 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
               padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
               width: 300,
               decoration: BoxDecoration(
-                  color: Color.fromARGB(252, 224, 182, 156),
+                  color: Color.fromARGB(250, 255, 227, 209),
                   borderRadius: BorderRadius.circular(30)),
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<String>(
                   value: dropdownValue,
                   icon: const Icon(
                     Icons.expand_circle_down,
-                    color: Color.fromARGB(255, 253, 116, 98),
+                    color: Color.fromARGB(227, 207, 19, 19),
                   ),
                   elevation: 16,
                   style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),

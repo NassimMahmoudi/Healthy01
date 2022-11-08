@@ -20,10 +20,13 @@ class _loginScreenState extends State<LoginScreen> {
     Size size = MediaQuery.of(context).size;
     var textField = TextField(
       controller: usernameController,
+      cursorColor: Color.fromARGB(255, 0, 0, 0),
       decoration: InputDecoration(
-        labelText: "Username",
+        hintText: "Username",
         filled: true, //<-- SEE HERE
+
         fillColor: const Color.fromARGB(255, 253, 234, 229),
+        icon: Icon(Icons.person),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
           borderSide: const BorderSide(
@@ -91,8 +94,10 @@ class _loginScreenState extends State<LoginScreen> {
               //margin: EdgeInsets.symmetric(horizontal: 50),
               child: TextField(
                 controller: passwordController,
+                cursorColor: Color.fromARGB(255, 0, 0, 0),
                 decoration: InputDecoration(
-                  labelText: "Password",
+                  icon: Icon(Icons.lock),
+                  hintText: "Password",
                   filled: true, //<-- SEE HERE
                   fillColor: const Color.fromARGB(255, 253, 234, 229),
                   border: OutlineInputBorder(
