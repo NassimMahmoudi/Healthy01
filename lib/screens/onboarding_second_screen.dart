@@ -1,9 +1,4 @@
-import 'dart:async';
-import 'dart:html';
-
 import 'package:flutter/material.dart';
-import 'package:healthy01/screens/home_screen.dart';
-import 'package:healthy01/screens/login.dart';
 
 class OnboardingSecondScreen extends StatefulWidget {
   const OnboardingSecondScreen({Key? key}) : super(key: key);
@@ -13,16 +8,18 @@ class OnboardingSecondScreen extends StatefulWidget {
 }
 
 class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController heightController = TextEditingController();
+  TextEditingController weightController = TextEditingController();
   static const List<String> list = <String>[
-    'Your activity lavel',
-    'Two',
-    'Three',
-    'Four'
+    'Sedentary',
+    'Slightly active',
+    'Moderately active',
+    'Very active',
+    'Extremely active'
   ];
   bool isChecked = false;
-  bool isCheckedw = false;
+  bool isCheckedw = true;
+  String? dropdownValue;
   @override
   void initState() {
     super.initState();
@@ -31,22 +28,6 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    String dropdownValue = list.first;
-    var textField = TextField(
-      controller: usernameController,
-      decoration: InputDecoration(
-        labelText: "Username",
-        filled: true, //<-- SEE HERE
-        fillColor: const Color.fromARGB(255, 253, 234, 229),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
-          borderSide: const BorderSide(
-            color: Color.fromARGB(255, 253, 116, 98),
-            width: 1.0,
-          ),
-        ),
-      ),
-    );
 
     return Scaffold(
       body: Padding(
@@ -74,7 +55,7 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.01,
+              height: MediaQuery.of(context).size.height * 0.02,
             ),
             const Text(
               'Following details will help us to estimate\nyour daily calorie needs',
@@ -86,7 +67,7 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.02,
+              height: MediaQuery.of(context).size.height * 0.04,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -102,10 +83,14 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
                       onChanged: (bool? value) {
                         setState(() {
                           isChecked = value!;
+                          isCheckedw = !value;
                         });
                       },
                     ),
                   ),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.02,
                 ),
                 Expanded(
                   child: Container(
@@ -118,6 +103,7 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
                       onChanged: (bool? value) {
                         setState(() {
                           isCheckedw = value!;
+                          isChecked = !value;
                         });
                       },
                     ),
@@ -137,7 +123,7 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
                   alignment: Alignment.center,
                   //margin: EdgeInsets.symmetric(horizontal: 50),
                   child: TextField(
-                    controller: passwordController,
+                    controller: heightController,
                     decoration: InputDecoration(
                       prefixIcon: const Icon(Icons.done),
                       labelText: "Height",
@@ -162,7 +148,7 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
                   alignment: Alignment.center,
                   //margin: EdgeInsets.symmetric(horizontal: 50),
                   child: TextField(
-                    controller: passwordController,
+                    controller: weightController,
                     decoration: InputDecoration(
                       labelText: "Weight",
                       filled: true, //<-- SEE HERE
@@ -180,28 +166,66 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
                 ),
               ),
             ]),
-            SizedBox(height: size.height * 0.03),
-            DropdownButton<String>(
-              value: dropdownValue,
-              icon: const Icon(Icons.arrow_downward),
-              elevation: 16,
-              style: const TextStyle(color: Colors.deepPurple),
-              underline: Container(
-                height: 2,
-                color: Colors.deepPurpleAccent,
+            SizedBox(height: size.height * 0.04),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+              width: 300,
+              decoration: BoxDecoration(
+                  color: Color.fromARGB(252, 224, 182, 156),
+                  borderRadius: BorderRadius.circular(30)),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+                  value: dropdownValue,
+                  icon: const Icon(
+                    Icons.expand_circle_down,
+                    color: Color.fromARGB(255, 253, 116, 98),
+                  ),
+                  elevation: 16,
+                  style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+                  borderRadius: BorderRadius.circular(30),
+                  underline: Container(
+                    color: Color.fromARGB(255, 253, 116, 98),
+                    width: 1.0,
+                    height: 2.0,
+                  ),
+                  onChanged: (String? value) {
+                    // This is called when the user selects an item.
+                    setState(() {
+                      dropdownValue = value!;
+                    });
+                  },
+                  hint: const Center(
+                      child: Text(
+                    'Select Activity Lavel',
+                    style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+                  )),
+                  isExpanded: true,
+                  items: list.map((e) {
+                    return DropdownMenuItem<String>(
+                      value: e,
+                      child: Container(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          e,
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                  selectedItemBuilder: (BuildContext context) => list
+                      .map((e) => Center(
+                            child: Text(
+                              e,
+                              style: const TextStyle(
+                                  fontSize: 18,
+                                  color: Color.fromARGB(255, 0, 0, 0),
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ))
+                      .toList(),
+                ),
               ),
-              onChanged: (String? value) {
-                // This is called when the user selects an item.
-                setState(() {
-                  dropdownValue = value!;
-                });
-              },
-              items: list.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
             ),
             SizedBox(height: size.height * 0.03),
             const Text(

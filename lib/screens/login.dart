@@ -1,8 +1,4 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:healthy01/screens/home_screen.dart';
-import 'package:healthy01/screens/login.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
