@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -120,7 +122,6 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(width: 8),
               ],
             ),
             SizedBox(
@@ -142,17 +143,24 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
                     decoration: InputDecoration(
                       prefixIcon: const Icon(
                         Icons.height,
+                        color: Color.fromARGB(255, 253, 116, 98),
                       ),
-                      labelText: "Height",
-                      filled: true, //<-- SEE HERE
-                      fillColor: const Color.fromARGB(255, 253, 234, 229),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: const BorderSide(
-                          color: Color.fromARGB(255, 253, 116, 98),
-                          width: 5.0,
-                        ),
+                      hintText: "Height",
+                      hintStyle:
+                          TextStyle(color: Colors.deepOrange, fontSize: 18),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(color: Colors.blue, width: 1.0),
                       ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(
+                            color: Color.fromARGB(255, 255, 200, 193),
+                            width: 1.0),
+                      ),
+
+                      //filled: true, //<-- SEE HERE
+                      //fillColor: const Color.fromARGB(255, 253, 234, 229),
                     ),
                     obscureText: false,
                   ),
@@ -173,16 +181,22 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
                     decoration: InputDecoration(
                       prefixIcon: const Icon(
                         Icons.monitor_weight,
+                        color: Color.fromARGB(255, 253, 116, 98),
                       ),
-                      labelText: "Weight",
-                      filled: true, //<-- SEE HERE
-                      fillColor: const Color.fromARGB(255, 253, 234, 229),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: const BorderSide(
-                          color: Color.fromARGB(255, 253, 116, 98),
-                          width: 5.0,
-                        ),
+                      hintText: "Weight",
+                      hintStyle:
+                          TextStyle(color: Colors.deepOrange, fontSize: 18),
+                      //filled: true, //<-- SEE HERE
+                      //fillColor: const Color.fromARGB(255, 253, 234, 229),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(color: Colors.blue, width: 1.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(
+                            color: Color.fromARGB(255, 255, 200, 193),
+                            width: 1.0),
                       ),
                     ),
                     obscureText: false,
@@ -196,7 +210,7 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
               width: 300,
               decoration: BoxDecoration(
                   color: Color.fromARGB(250, 255, 227, 209),
-                  borderRadius: BorderRadius.circular(30)),
+                  borderRadius: BorderRadius.circular(20)),
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<String>(
                   value: dropdownValue,
@@ -206,7 +220,7 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
                   ),
                   elevation: 16,
                   style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(20),
                   underline: Container(
                     color: Color.fromARGB(255, 253, 116, 98),
                     width: 1.0,
@@ -241,9 +255,8 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
                             child: Text(
                               e,
                               style: const TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 16,
                                   color: Color.fromARGB(255, 0, 0, 0),
-                                  fontStyle: FontStyle.italic,
                                   fontWeight: FontWeight.bold),
                             ),
                           ))
