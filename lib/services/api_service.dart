@@ -6,6 +6,7 @@ import 'package:healthy01/models/register_response_model.dart';
 import 'package:healthy01/services/shared_service.dart';
 import 'package:http/http.dart' as http;
 
+import '../models/login_response_model.dart';
 import '../models/register_request_model.dart';
 
 class APIService {
@@ -22,7 +23,7 @@ class APIService {
       body: jsonEncode(model.toJson()),
     );
     if (response.statusCode == 200) {
-      await SharedService.setLoginDetails(loginResponseJson(response.body))
+      await SharedService.setLoginDetails(loginResponseJson(response.body));
       return true;
     } else {
       return false;

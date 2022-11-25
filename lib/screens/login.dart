@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-
+import '../services/api_service.dart';
+import '../config.dart';
+import '../models/login_request_model.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -8,6 +10,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _loginScreenState extends State<LoginScreen> {
+  bool isApiCallProcess = false;
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   @override
