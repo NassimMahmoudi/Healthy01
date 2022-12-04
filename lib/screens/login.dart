@@ -1,6 +1,11 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:healthy01/const/colors.dart';
+import 'package:healthy01/screens/forgetPwScreen.dart';
+import 'package:healthy01/screens/homeScreen.dart';
+import 'package:healthy01/screens/register.dart';
+import 'package:healthy01/utils/helper.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
 import 'package:snippet_coder_utils/hex_color.dart';
@@ -9,6 +14,7 @@ import '../config.dart';
 import '../models/login_request_model.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const routeName = "/loginScreen";
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
@@ -45,195 +51,249 @@ class _loginScreenState extends State<LoginScreen> {
 
   Widget _loginUI(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
-          ),
-          Container(
-            height: 213,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/login.png'),
-              ),
+    return Scaffold(
+      body: Container(
+        height: Helper.getScreenHeight(context),
+        width: Helper.getScreenWidth(context),
+        child: SafeArea(
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 40,
+              vertical: 30,
             ),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.05,
-          ),
-          const Text(
-            'Welcome To Healthy APP',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 20,
-              color: Color(0xFF0E0E2D),
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.01,
-          ),
-          const Text(
-            'We Help users to have a healthy lifestyle',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 16,
-              color: Color(0xff9A9DB0),
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.02,
-          ),
-          Container(
-            height: 50,
-            alignment: Alignment.center,
-            //margin: EdgeInsets.symmetric(horizontal: 50),
-            child: FormHelper.inputFieldWidget(
-              context,
-              prefixIcon: const Icon(Icons.person),
-              "Username",
-              "Username",
-              (onValidateVal) {
-                if (onValidateVal.isEmpty) {
-                  return 'Username can\'t be empty.';
-                }
-
-                return null;
-              },
-              (onSavedVal) => {
-                userName = onSavedVal,
-              },
-              initialValue: "",
-              obscureText: false,
-              borderFocusColor: Color.fromARGB(255, 230, 78, 78),
-              prefixIconColor: Color.fromARGB(255, 230, 78, 78),
-              borderColor: Color.fromARGB(255, 230, 78, 78),
-              textColor: Color.fromARGB(255, 230, 78, 78),
-              hintColor: Color.fromARGB(255, 230, 78, 78),
-              borderRadius: 10,
-            ),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.005,
-          ),
-          Container(
-            height: 50,
-            alignment: Alignment.center,
-            //margin: EdgeInsets.symmetric(horizontal: 50),
-            child: FormHelper.inputFieldWidget(
-              context,
-              prefixIcon: const Icon(Icons.lock),
-              "Password",
-              "Password",
-              (onValidateVal) {
-                if (onValidateVal.isEmpty) {
-                  return 'Password can\'t be empty.';
-                }
-
-                return null;
-              },
-              (onSavedVal) => {
-                password = onSavedVal,
-              },
-              initialValue: "",
-              obscureText: hidePassword,
-              borderFocusColor: Color.fromARGB(255, 230, 78, 78),
-              prefixIconColor: Color.fromARGB(255, 230, 78, 78),
-              borderColor: Color.fromARGB(255, 230, 78, 78),
-              textColor: Color.fromARGB(255, 230, 78, 78),
-              hintColor: Color.fromARGB(255, 230, 78, 78),
-              borderRadius: 10,
-              suffixIcon: IconButton(
-                onPressed: () {
-                  setState(() {
-                    hidePassword = !hidePassword;
-                  });
-                },
-                color: Color.fromARGB(255, 177, 21, 21).withOpacity(0.7),
-                icon: Icon(
-                  hidePassword ? Icons.visibility_off : Icons.visibility,
+            child: Column(
+              children: [
+                Text(
+                  "Login",
+                  style: Helper.getTheme(context).headline6,
                 ),
-              ),
-            ),
-          ),
-          Container(
-            alignment: Alignment.center,
-            margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-            // ignore: prefer_const_constructors
-            child: Text(
-              "Forget your password?",
-              // ignore: prefer_const_constructors
-              style: TextStyle(
-                  fontFamily: 'Montserrat Regular',
-                  fontSize: 15,
-                  color: Color.fromARGB(255, 230, 78, 78)),
-            ),
-          ),
-          SizedBox(height: size.height * 0.05),
-          Container(
-              height: 50,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(26.5),
-                gradient: const LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Color(0xFFf6925c),
-                    Color(0xFFf37552),
-                  ],
+                Spacer(),
+                Text('Add your details to login'),
+                Spacer(),
+                Container(
+                  width: double.infinity,
+                  height: 50,
+                  // ignore: prefer_const_constructors
+                  decoration: ShapeDecoration(
+                    color: AppColor.placeholderBg,
+                    shape: const StadiumBorder(),
+                  ),
+                  //margin: EdgeInsets.symmetric(horizontal: 50),
+                  child: FormHelper.inputFieldWidget(
+                    context,
+                    "Username",
+                    "Username",
+                    (onValidateVal) {
+                      if (onValidateVal.isEmpty) {
+                        return 'Username can\'t be empty.';
+                      }
+
+                      return null;
+                    },
+                    (onSavedVal) => {
+                      userName = onSavedVal,
+                    },
+                    borderColor: AppColor.placeholderBg,
+                    borderFocusColor: AppColor.placeholderBg,
+                    textColor: AppColor.placeholder,
+                    hintColor: AppColor.placeholder,
+                    borderRadius: 10,
+                  ),
                 ),
-              ),
-              child: Center(
-                child: FormHelper.submitButton(
-                  "Sign In",
-                  () {
-                    print(' $userName, $password');
-                    if (validateAndSave()) {
-                      setState(() {
-                        isApiCallProcess = true;
-                      });
+                Spacer(),
+                Container(
+                  height: 50,
+                  alignment: Alignment.center,
+                  decoration: const ShapeDecoration(
+                    color: AppColor.placeholderBg,
+                    shape: StadiumBorder(),
+                  ),
+                  //margin: EdgeInsets.symmetric(horizontal: 50),
+                  child: FormHelper.inputFieldWidget(
+                    context,
+                    "Password",
+                    "Password",
+                    (onValidateVal) {
+                      if (onValidateVal.isEmpty) {
+                        return 'Password can\'t be empty.';
+                      }
 
-                      LoginRequestModel model = LoginRequestModel(
-                        username: userName!,
-                        password: password!,
-                      );
+                      return null;
+                    },
+                    (onSavedVal) => {
+                      password = onSavedVal,
+                    },
+                    prefixIcon: const Icon(Icons.lock),
+                    initialValue: "",
+                    obscureText: hidePassword,
+                    borderFocusColor: AppColor.placeholderBg,
+                    prefixIconColor: Color.fromARGB(255, 230, 78, 78),
+                    borderColor: AppColor.placeholderBg,
+                    textColor: AppColor.placeholder,
+                    hintColor: AppColor.placeholder,
+                    borderRadius: 10,
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          hidePassword = !hidePassword;
+                        });
+                      },
+                      color: Color.fromARGB(255, 177, 21, 21).withOpacity(0.7),
+                      icon: Icon(
+                        hidePassword ? Icons.visibility_off : Icons.visibility,
+                      ),
+                    ),
+                  ),
+                ),
+                Spacer(),
+                Container(
+                    height: 50,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(26.5),
+                      color: Color(0xFFFC6011),
+                    ),
+                    child: Center(
+                      child: FormHelper.submitButton(
+                        "Sign In",
+                        () {
+                          print(' $userName, $password');
+                          if (validateAndSave()) {
+                            setState(() {
+                              isApiCallProcess = true;
+                            });
 
-                      APIService.login(model).then(
-                        (response) {
-                          setState(() {
-                            isApiCallProcess = false;
-                          });
-
-                          if (response) {
-                            Navigator.pushNamedAndRemoveUntil(
-                              context,
-                              '/home',
-                              (route) => false,
+                            LoginRequestModel model = LoginRequestModel(
+                              username: userName!,
+                              password: password!,
                             );
-                          } else {
-                            FormHelper.showSimpleAlertDialog(
-                              context,
-                              Config.appName,
-                              "Invalid Username/Password !!",
-                              "OK",
-                              () {
-                                Navigator.of(context).pop();
+
+                            APIService.login(model).then(
+                              (response) {
+                                setState(() {
+                                  isApiCallProcess = false;
+                                });
+
+                                if (response) {
+                                  Navigator.of(context).pushReplacementNamed(
+                                      HomeScreen.routeName);
+                                } else {
+                                  FormHelper.showSimpleAlertDialog(
+                                    context,
+                                    Config.appName,
+                                    "Invalid Username/Password !!",
+                                    "OK",
+                                    () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  );
+                                }
                               },
                             );
                           }
                         },
-                      );
-                    }
+                        txtColor: Color.fromARGB(255, 255, 255, 255),
+                        borderRadius: 10,
+                      ),
+                    )),
+                Spacer(),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context)
+                        .pushReplacementNamed(ForgetPwScreen.routeName);
                   },
-                  txtColor: Color.fromARGB(255, 255, 255, 255),
-                  borderRadius: 10,
+                  child: Text("Forget your password?"),
                 ),
-              )),
-        ],
+                Spacer(
+                  flex: 2,
+                ),
+                Text("or Login With"),
+                Spacer(),
+                SizedBox(
+                  height: 50,
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                        Color(
+                          0xFF367FC0,
+                        ),
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          Helper.getAssetName(
+                            "fb.png",
+                            "virtual",
+                          ),
+                        ),
+                        SizedBox(
+                          width: 30,
+                        ),
+                        Text("Login with Facebook")
+                      ],
+                    ),
+                  ),
+                ),
+                Spacer(),
+                SizedBox(
+                  height: 50,
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                        Color(
+                          0xFFDD4B39,
+                        ),
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          Helper.getAssetName(
+                            "google.png",
+                            "virtual",
+                          ),
+                        ),
+                        SizedBox(
+                          width: 30,
+                        ),
+                        Text("Login with Google")
+                      ],
+                    ),
+                  ),
+                ),
+                Spacer(
+                  flex: 4,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context)
+                        .pushReplacementNamed(RegisterScreen.routeName);
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Don't have an Account?"),
+                      Text(
+                        "Sign Up",
+                        style: TextStyle(
+                          color: AppColor.orange,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

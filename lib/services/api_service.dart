@@ -23,7 +23,7 @@ class APIService {
       body: jsonEncode(model.toJson()),
     );
     if (response.statusCode == 200) {
-      await SharedService.setLoginDetails(loginResponseJson(response.body));
+      // await SharedService.setLoginDetails(loginResponseJson(response.body));
       return true;
     } else {
       return false;
