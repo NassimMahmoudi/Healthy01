@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:api_cache_manager/utils/cache_manager.dart';
 import 'package:api_cache_manager/models/cache_db_model.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 
 import '../models/login_response_model.dart';
 
@@ -28,12 +29,13 @@ class SharedService {
   static Future<void> setLoginDetails(
     LoginResponseModel loginResponse,
   ) async {
+    /*
     APICacheDBModel cacheModel = APICacheDBModel(
       key: "login_details",
       syncData: jsonEncode(loginResponse.toJson()),
     );
-
-    await APICacheManager().addCacheData(cacheModel);
+    
+    await APICacheManager().addCacheData(cacheModel);*/
   }
 
   static Future<void> logout(BuildContext context) async {

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:healthy01/const/colors.dart';
 import 'package:healthy01/utils/helper.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
@@ -34,6 +35,7 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
   @override
   void initState() {
     super.initState();
+    session();
   }
 
   @override
@@ -311,5 +313,10 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
       return true;
     }
     return false;
+  }
+
+  Future<void> session() async {
+    dynamic id = await SessionManager().get("id");
+    print(id);
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:healthy01/config.dart';
 import 'package:healthy01/models/login_request_model.dart';
 import 'package:healthy01/models/register_response_model.dart';
@@ -23,7 +24,13 @@ class APIService {
       body: jsonEncode(model.toJson()),
     );
     if (response.statusCode == 200) {
-      // await SharedService.setLoginDetails(loginResponseJson(response.body));
+      print('***   SharedService   ***  ');
+      final Map parsed = json.decode(response.body);
+      print(parsed['data']['id']);
+      var sessionManager = SessionManager();
+      await sessionManager.set("id", parsed['data']['id']);
+      dynamic id = await SessionManager().get("id");
+      print(id);
       return true;
     } else {
       return false;
