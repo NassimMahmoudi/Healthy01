@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:healthy01/screens/login.dart';
 
 import '../const/colors.dart';
 import '../utils/helper.dart';
@@ -32,43 +33,24 @@ class HomeScreen extends StatelessWidget {
                           "Good morning Akila!",
                           style: Helper.getTheme(context).headline5,
                         ),
-                        Image.asset(Helper.getAssetName("cart.png", "virtual"))
+                        Material(
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.of(context)
+                                  .pushReplacementNamed(LoginScreen.routeName);
+                            },
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20.0),
+                              child: Image.asset(Helper.getAssetName(
+                                  "user_filled.png", "virtual")),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
                   SizedBox(
                     height: 20,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                    ),
-                    child: Text("Deilivering to"),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                    ),
-                    child: DropdownButtonHideUnderline(
-                      child: SizedBox(
-                        width: 250,
-                        child: DropdownButton(
-                          value: "current location",
-                          items: [
-                            DropdownMenuItem(
-                              child: Text("Current Location"),
-                              value: "current location",
-                            ),
-                          ],
-                          icon: Image.asset(
-                            Helper.getAssetName(
-                                "dropdown_filled.png", "virtual"),
-                          ),
-                          style: Helper.getTheme(context).headline4,
-                          onChanged: (_) {},
-                        ),
-                      ),
-                    ),
                   ),
                   SizedBox(
                     height: 20,

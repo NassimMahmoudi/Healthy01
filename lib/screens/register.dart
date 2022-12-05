@@ -7,6 +7,7 @@ import 'package:healthy01/const/colors.dart';
 import 'package:healthy01/models/register_request_model.dart';
 import 'package:healthy01/screens/homeScreen.dart';
 import 'package:healthy01/screens/home_screen.dart';
+import 'package:healthy01/screens/login.dart';
 import 'package:healthy01/services/api_service.dart';
 import 'package:healthy01/utils/helper.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
@@ -24,14 +25,12 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _registerScreenState extends State<RegisterScreen> {
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController ageController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
   bool isApiCallProcess = false;
   String? userName;
   String? password;
+  String? email;
+  String? phone;
+  String? age;
   bool hidePassword = true;
   GlobalKey<FormState> globalFormKey = GlobalKey<FormState>();
   bool isChecked = false;
@@ -122,98 +121,142 @@ class _registerScreenState extends State<RegisterScreen> {
                 ),
                 Spacer(),
                 Container(
+                  width: double.infinity,
                   height: 50,
-                  alignment: Alignment.center,
+                  // ignore: prefer_const_constructors
+                  decoration: ShapeDecoration(
+                    color: AppColor.placeholderBg,
+                    shape: const StadiumBorder(),
+                  ),
                   //margin: EdgeInsets.symmetric(horizontal: 50),
-                  child: TextField(
-                    controller: emailController,
-                    decoration: InputDecoration(
-                      labelText: "Email",
-                      filled: true, //<-- SEE HERE
-                      fillColor: Color.fromARGB(255, 253, 234, 229),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide(
-                          color: Color.fromARGB(255, 253, 116, 98),
-                          width: 5.0,
-                        ),
-                      ),
-                    ),
-                    obscureText: false,
+                  child: FormHelper.inputFieldWidget(
+                    context,
+                    "Email",
+                    "Email",
+                    (onValidateVal) {
+                      if (onValidateVal.isEmpty) {
+                        return 'Email can\'t be empty.';
+                      }
+
+                      return null;
+                    },
+                    (onSavedVal) => {
+                      email = onSavedVal,
+                    },
+                    borderColor: AppColor.placeholderBg,
+                    borderFocusColor: AppColor.placeholderBg,
+                    textColor: AppColor.placeholder,
+                    hintColor: AppColor.placeholder,
+                    borderRadius: 10,
                   ),
                 ),
                 Spacer(),
                 Container(
                   height: 50,
                   alignment: Alignment.center,
+                  decoration: const ShapeDecoration(
+                    color: AppColor.placeholderBg,
+                    shape: StadiumBorder(),
+                  ),
                   //margin: EdgeInsets.symmetric(horizontal: 50),
-                  child: TextField(
-                    controller: passwordController,
-                    decoration: InputDecoration(
-                      labelText: "Password",
-                      filled: true, //<-- SEE HERE
-                      fillColor: Color.fromARGB(255, 253, 234, 229),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide(
-                          color: Color.fromARGB(255, 253, 116, 98),
-                          width: 5.0,
-                        ),
+                  child: FormHelper.inputFieldWidget(
+                    context,
+                    "Password",
+                    "Password",
+                    (onValidateVal) {
+                      if (onValidateVal.isEmpty) {
+                        return 'Password can\'t be empty.';
+                      }
+
+                      return null;
+                    },
+                    (onSavedVal) => {
+                      password = onSavedVal,
+                    },
+                    prefixIcon: const Icon(Icons.lock),
+                    initialValue: "",
+                    obscureText: hidePassword,
+                    borderFocusColor: AppColor.placeholderBg,
+                    prefixIconColor: Color.fromARGB(255, 230, 78, 78),
+                    borderColor: AppColor.placeholderBg,
+                    textColor: AppColor.placeholder,
+                    hintColor: AppColor.placeholder,
+                    borderRadius: 10,
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          hidePassword = !hidePassword;
+                        });
+                      },
+                      color: Color.fromARGB(255, 177, 21, 21).withOpacity(0.7),
+                      icon: Icon(
+                        hidePassword ? Icons.visibility_off : Icons.visibility,
                       ),
                     ),
-                    obscureText: true,
                   ),
                 ),
                 Spacer(),
                 Container(
+                  width: double.infinity,
                   height: 50,
-                  alignment: Alignment.center,
+                  // ignore: prefer_const_constructors
+                  decoration: ShapeDecoration(
+                    color: AppColor.placeholderBg,
+                    shape: const StadiumBorder(),
+                  ),
                   //margin: EdgeInsets.symmetric(horizontal: 50),
-                  child: TextField(
-                    controller: phoneController,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly
-                    ],
-                    decoration: InputDecoration(
-                      labelText: "Phone",
-                      filled: true, //<-- SEE HERE
-                      fillColor: Color.fromARGB(255, 253, 234, 229),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide(
-                          color: Color.fromARGB(255, 253, 116, 98),
-                          width: 5.0,
-                        ),
-                      ),
-                    ),
-                    obscureText: false,
+                  child: FormHelper.inputFieldWidget(
+                    context,
+                    "Phone",
+                    "Phone",
+                    (onValidateVal) {
+                      if (onValidateVal.isEmpty) {
+                        return 'Phone can\'t be empty.';
+                      }
+
+                      return null;
+                    },
+                    (onSavedVal) => {
+                      phone = onSavedVal,
+                    },
+                    borderColor: AppColor.placeholderBg,
+                    borderFocusColor: AppColor.placeholderBg,
+                    textColor: AppColor.placeholder,
+                    hintColor: AppColor.placeholder,
+                    borderRadius: 10,
+                    isNumeric: true,
                   ),
                 ),
                 Spacer(),
                 Container(
+                  width: double.infinity,
                   height: 50,
-                  alignment: Alignment.center,
+                  // ignore: prefer_const_constructors
+                  decoration: ShapeDecoration(
+                    color: AppColor.placeholderBg,
+                    shape: const StadiumBorder(),
+                  ),
                   //margin: EdgeInsets.symmetric(horizontal: 50),
-                  child: TextField(
-                    controller: ageController,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly
-                    ],
-                    decoration: InputDecoration(
-                      labelText: "Age",
-                      filled: true, //<-- SEE HERE
-                      fillColor: Color.fromARGB(255, 253, 234, 229),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: BorderSide(
-                          color: Color.fromARGB(255, 253, 116, 98),
-                          width: 5.0,
-                        ),
-                      ),
-                    ),
-                    obscureText: false,
+                  child: FormHelper.inputFieldWidget(
+                    context,
+                    "Age",
+                    "Age",
+                    (onValidateVal) {
+                      if (onValidateVal.isEmpty) {
+                        return 'Age can\'t be empty.';
+                      }
+
+                      return null;
+                    },
+                    (onSavedVal) => {
+                      age = onSavedVal,
+                    },
+                    borderColor: AppColor.placeholderBg,
+                    borderFocusColor: AppColor.placeholderBg,
+                    textColor: AppColor.placeholder,
+                    hintColor: AppColor.placeholder,
+                    borderRadius: 10,
+                    isNumeric: true,
                   ),
                 ),
                 CheckboxListTile(
@@ -240,8 +283,9 @@ class _registerScreenState extends State<RegisterScreen> {
                       child: FormHelper.submitButton(
                         "Sign Up",
                         () {
-                          print(' $userName, $password');
                           if (validateAndSave()) {
+                            print(
+                                ' $userName, $password, $email, $phone, $age');
                             setState(() {
                               isApiCallProcess = true;
                             });
@@ -249,9 +293,9 @@ class _registerScreenState extends State<RegisterScreen> {
                             RegisterRequestModel model = RegisterRequestModel(
                               username: userName!,
                               password: password!,
-                              email: password!,
-                              age: password!,
-                              phone: password!,
+                              email: email!,
+                              age: age!,
+                              phone: phone!,
                             );
 
                             APIService.register(model).then(
@@ -266,11 +310,9 @@ class _registerScreenState extends State<RegisterScreen> {
                                     "Registration Successful. Please login to the account",
                                     "OK",
                                     () {
-                                      Navigator.pushNamedAndRemoveUntil(
-                                        context,
-                                        '/',
-                                        (route) => false,
-                                      );
+                                      Navigator.of(context)
+                                          .pushReplacementNamed(
+                                              OnboardingSecondScreen.routeName);
                                     },
                                   );
                                 } else {
@@ -290,6 +332,7 @@ class _registerScreenState extends State<RegisterScreen> {
                         },
                         txtColor: Color.fromARGB(255, 255, 255, 255),
                         borderRadius: 10,
+                        btnColor: Color(0xFFFC6011),
                       ),
                     )),
               ],

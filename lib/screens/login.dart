@@ -194,6 +194,7 @@ class _loginScreenState extends State<LoginScreen> {
                         },
                         txtColor: Color.fromARGB(255, 255, 255, 255),
                         borderRadius: 10,
+                        btnColor: Color(0xFFFC6011),
                       ),
                     )),
                 Spacer(),

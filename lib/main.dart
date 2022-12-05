@@ -15,6 +15,7 @@ import 'package:healthy01/screens/myOrderScreen.dart';
 import 'package:healthy01/screens/newPwScreen.dart';
 import 'package:healthy01/screens/notificationScreen.dart';
 import 'package:healthy01/screens/offerScreen.dart';
+import 'package:healthy01/screens/onboarding_second_screen.dart';
 import 'package:healthy01/screens/paymentScreen.dart';
 import 'package:healthy01/screens/profileScreen.dart';
 import 'package:healthy01/screens/register.dart';
@@ -94,6 +95,8 @@ class App extends StatelessWidget {
       ),
       routes: {
         RegisterScreen.routeName: (context) => const RegisterScreen(),
+        OnboardingSecondScreen.routeName: (context) =>
+            const OnboardingSecondScreen(),
         LoginScreen.routeName: (context) => const LoginScreen(),
         OnboardingScreen.routeName: (context) => const OnboardingScreen(),
         ForgetPwScreen.routeName: (context) => ForgetPwScreen(),
