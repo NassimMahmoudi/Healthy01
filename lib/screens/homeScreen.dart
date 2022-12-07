@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:healthy01/screens/login.dart';
 
 import '../const/colors.dart';
@@ -7,8 +8,21 @@ import '../widgets/customNavBar.dart';
 import '../screens/individualItem.dart';
 import '../widgets/searchBar.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   static const routeName = "/homeScreen";
+  const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _homeScreenState();
+}
+
+class _homeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    session();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +44,7 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Good morning Akila!",
+                          "Good morning Nassim!",
                           style: Helper.getTheme(context).headline5,
                         ),
                         Material(
@@ -271,6 +285,18 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> session() async {
+    dynamic id = await SessionManager().get("id");
+    dynamic username = await SessionManager().get("username");
+    dynamic email = await SessionManager().get("email");
+    dynamic phone = await SessionManager().get("phone");
+    dynamic age = await SessionManager().get("age");
+    print(id);
+    print(username);
+    print(email);
+    print(phone);
   }
 }
 

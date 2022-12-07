@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:healthy01/const/colors.dart';
 import 'package:healthy01/screens/dessertScreen.dart';
+import 'package:healthy01/screens/login.dart';
+import 'package:healthy01/screens/onboarding_second_screen.dart';
 
 import '../utils/helper.dart';
 import '../widgets/customNavBar.dart';
@@ -24,19 +26,28 @@ class MenuScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Menu",
+                        "User Informations",
                         style: Helper.getTheme(context).headline5,
                       ),
-                      Image.asset(
-                        Helper.getAssetName("cart.png", "virtual"),
-                      )
+                      Material(
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushReplacementNamed(LoginScreen.routeName);
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20.0),
+                            child: Image.asset(Helper.getAssetName(
+                                "user_filled.png", "virtual")),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
                 SizedBox(
                   height: 20,
                 ),
-                SearchBar(title: "Search Food"),
                 SizedBox(
                   height: 20,
                 ),
@@ -57,94 +68,94 @@ class MenuScreen extends StatelessWidget {
                               ),
                               color: AppColor.orange),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                        ListView(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 20.0),
                             children: [
-                              MenuCard(
-                                imageShape: ClipOval(
-                                  child: Container(
-                                    height: 60,
-                                    width: 60,
-                                    child: Image.asset(
-                                      Helper.getAssetName(
-                                          "western2.jpg", "real"),
-                                      fit: BoxFit.cover,
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const MenuCard(
+                                    name: "Gender",
+                                    count: "Man",
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  const MenuCard(
+                                    name: "Height",
+                                    count: "179 cm",
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  const MenuCard(
+                                    name: "Weight",
+                                    count: "79 kg",
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  const MenuCard(
+                                    name: "heart Rate",
+                                    count: "70",
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context)
+                                          .pushNamed(DessertScreen.routeName);
+                                    },
+                                    child: const MenuCard(
+                                      name: "body Temperature",
+                                      count: "37°C",
                                     ),
                                   ),
-                                ),
-                                name: "Food",
-                                count: "120",
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              MenuCard(
-                                imageShape: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Container(
-                                    height: 60,
-                                    width: 60,
-                                    child: Image.asset(
-                                      Helper.getAssetName(
-                                          "coffee2.jpg", "real"),
-                                      fit: BoxFit.cover,
-                                    ),
+                                  SizedBox(
+                                    height: 20,
                                   ),
-                                ),
-                                name: "Beverage",
-                                count: "220",
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context)
-                                      .pushNamed(DessertScreen.routeName);
-                                },
-                                child: MenuCard(
-                                  imageShape: ClipPath(
-                                    clipper: CustomTriangle(),
-                                    child: Container(
-                                      height: 70,
-                                      width: 70,
-                                      child: Image.asset(
-                                        Helper.getAssetName(
-                                            "dessert.jpg", "real"),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
+                                  const MenuCard(
+                                    name: "Activity Lavel",
+                                    count: "Very active",
                                   ),
-                                  name: "Desserts",
-                                  count: "135",
-                                ),
+                                ],
                               ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              MenuCard(
-                                imageShape: ClipPath(
-                                  clipper: CustomDiamond(),
-                                  child: Container(
-                                    height: 80,
-                                    width: 80,
-                                    child: Image.asset(
-                                      Helper.getAssetName(
-                                          "hamburger3.jpg", "real"),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                                name: "Promotions",
-                                count: "25",
-                              ),
-                            ],
-                          ),
-                        )
+                            ])
                       ],
-                    ))
+                    )),
+                const SizedBox(
+                  height: 35,
+                ),
+                Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      MenuCard(
+                        name: "Calories Day",
+                        count: "379 calorie",
+                      ),
+                    ],
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Ink(
+                    decoration: const ShapeDecoration(
+                      color: Color(0xFFFC6011),
+                      shape: CircleBorder(),
+                    ),
+                    child: IconButton(
+                      icon: const Icon(Icons.edit_note),
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      onPressed: () {
+                        Navigator.of(context).pushReplacementNamed(
+                            OnboardingSecondScreen.routeName);
+                      },
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -166,15 +177,12 @@ class MenuCard extends StatelessWidget {
     key,
     required String name,
     required String count,
-    required Widget imageShape,
   })  : _name = name,
         _count = count,
-        _imageShape = imageShape,
         super(key: key);
 
   final String _name;
   final String _count;
-  final Widget _imageShape;
 
   @override
   Widget build(BuildContext context) {
@@ -218,38 +226,8 @@ class MenuCard extends StatelessWidget {
               SizedBox(
                 height: 5,
               ),
-              Text("$_count items")
+              Text("$_count")
             ],
-          ),
-        ),
-        SizedBox(
-          height: 80,
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: _imageShape,
-          ),
-        ),
-        SizedBox(
-          height: 80,
-          child: Align(
-            alignment: Alignment.centerRight,
-            child: Container(
-              height: 40,
-              width: 40,
-              decoration: ShapeDecoration(
-                  shape: CircleBorder(),
-                  color: Colors.white,
-                  shadows: [
-                    BoxShadow(
-                      color: AppColor.placeholder,
-                      offset: Offset(0, 2),
-                      blurRadius: 5,
-                    )
-                  ]),
-              child: Image.asset(
-                Helper.getAssetName("next_filled.png", "virtual"),
-              ),
-            ),
           ),
         ),
       ],

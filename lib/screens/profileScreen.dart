@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healthy01/const/colors.dart';
+import 'package:healthy01/screens/login.dart';
 import 'package:healthy01/utils/helper.dart';
 import 'package:healthy01/widgets/customNavBar.dart';
 
@@ -26,9 +27,19 @@ class ProfileScreen extends StatelessWidget {
                             "Profile",
                             style: Helper.getTheme(context).headline5,
                           ),
-                          Image.asset(
-                            Helper.getAssetName("cart.png", "virtual"),
-                          )
+                          Material(
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.of(context).pushReplacementNamed(
+                                    LoginScreen.routeName);
+                              },
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20.0),
+                                child: Image.asset(Helper.getAssetName(
+                                    "user_filled.png", "virtual")),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                       SizedBox(
@@ -90,10 +101,6 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       SizedBox(
                         height: 5,
-                      ),
-                      Text("Sign Out"),
-                      SizedBox(
-                        height: 40,
                       ),
                       CustomFormImput(
                         label: "Name",

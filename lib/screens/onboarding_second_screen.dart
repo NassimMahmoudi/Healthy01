@@ -3,7 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
+import 'package:healthy01/config.dart';
 import 'package:healthy01/const/colors.dart';
+import 'package:healthy01/models/details_request_model.dart';
+import 'package:healthy01/screens/homeScreen.dart';
+import 'package:healthy01/services/api_service.dart';
 import 'package:healthy01/utils/helper.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
@@ -22,6 +26,9 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
   String? height;
   String? weight;
   String? sexe;
+  String? id;
+  String? heart_Rate;
+  String? body_Temp;
   static const List<String> list = <String>[
     'Sedentary',
     'Slightly active',
@@ -31,11 +38,12 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
   ];
   bool isChecked = false;
   bool isCheckedw = true;
-  String? dropdownValue;
+  String? level;
   @override
   void initState() {
     super.initState();
     session();
+    id = '638fd5909d0962df8f88482f';
   }
 
   @override
@@ -109,6 +117,11 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
                             setState(() {
                               isChecked = value!;
                               isCheckedw = !value;
+                              if (isChecked) {
+                                sexe = 'Man';
+                              } else {
+                                sexe = 'Woman';
+                              }
                             });
                           },
                         ),
@@ -134,6 +147,11 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
                             setState(() {
                               isCheckedw = value!;
                               isChecked = !value;
+                              if (isChecked) {
+                                sexe = 'Man';
+                              } else {
+                                sexe = 'Woman';
+                              }
                             });
                           },
                         ),
@@ -213,6 +231,76 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
                 ),
                 Spacer(),
                 Container(
+                  width: double.infinity,
+                  height: 50,
+                  // ignore: prefer_const_constructors
+                  decoration: ShapeDecoration(
+                    color: AppColor.placeholderBg,
+                    shape: const StadiumBorder(),
+                  ),
+                  //margin: EdgeInsets.symmetric(horizontal: 50),
+                  child: FormHelper.inputFieldWidget(
+                    context,
+                    "Heart Rate",
+                    "Heart Rate	",
+                    (onValidateVal) {
+                      if (onValidateVal.isEmpty) {
+                        return 'Heart Rate can\'t be empty.';
+                      }
+
+                      return null;
+                    },
+                    (onSavedVal) => {
+                      heart_Rate = onSavedVal,
+                    },
+                    borderColor: AppColor.placeholderBg,
+                    borderFocusColor: AppColor.placeholderBg,
+                    textColor: AppColor.placeholder,
+                    hintColor: AppColor.placeholder,
+                    borderRadius: 10,
+                    suffixIcon: Icon(
+                      Icons.monitor_heart,
+                      color: Color.fromARGB(255, 255, 30, 0),
+                    ),
+                  ),
+                ),
+                Spacer(),
+                Container(
+                  width: double.infinity,
+                  height: 50,
+                  // ignore: prefer_const_constructors
+                  decoration: ShapeDecoration(
+                    color: AppColor.placeholderBg,
+                    shape: const StadiumBorder(),
+                  ),
+                  //margin: EdgeInsets.symmetric(horizontal: 50),
+                  child: FormHelper.inputFieldWidget(
+                    context,
+                    "Body Temp",
+                    "Body Temp",
+                    (onValidateVal) {
+                      if (onValidateVal.isEmpty) {
+                        return 'Body Temp can\'t be empty.';
+                      }
+
+                      return null;
+                    },
+                    (onSavedVal) => {
+                      body_Temp = onSavedVal,
+                    },
+                    borderColor: AppColor.placeholderBg,
+                    borderFocusColor: AppColor.placeholderBg,
+                    textColor: AppColor.placeholder,
+                    hintColor: AppColor.placeholder,
+                    borderRadius: 10,
+                    suffixIcon: Icon(
+                      Icons.temple_hindu,
+                      color: Color.fromARGB(255, 255, 30, 0),
+                    ),
+                  ),
+                ),
+                Spacer(),
+                Container(
                   padding:
                       const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
                   width: 300,
@@ -221,7 +309,7 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
                       borderRadius: BorderRadius.circular(20)),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton<String>(
-                      value: dropdownValue,
+                      value: level,
                       icon: const Icon(
                         Icons.expand_circle_down,
                         color: Color.fromARGB(255, 255, 30, 0),
@@ -238,7 +326,7 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
                       onChanged: (String? value) {
                         // This is called when the user selects an item.
                         setState(() {
-                          dropdownValue = value!;
+                          level = value!;
                         });
                       },
                       hint: const Center(
@@ -294,7 +382,55 @@ class _onboardingSecondScreenState extends State<OnboardingSecondScreen> {
                     child: IconButton(
                       icon: const Icon(Icons.navigate_next),
                       color: Color.fromARGB(255, 255, 255, 255),
-                      onPressed: () {},
+                      onPressed: () {
+                        if (validateAndSave()) {
+                          print(
+                              ' $id,$sexe, $height, $weight, $heart_Rate, $body_Temp, $level');
+                          setState(() {
+                            isApiCallProcess = true;
+                          });
+
+                          DetailsRequestModel model = DetailsRequestModel(
+                            id: id!,
+                            sexe: sexe!,
+                            height: height!,
+                            weight: weight!,
+                            heartRate: heart_Rate!,
+                            bodyTemp: body_Temp!,
+                            level: level!,
+                          );
+
+                          APIService.addDetails(model).then(
+                            (response) {
+                              setState(() {
+                                isApiCallProcess = false;
+                              });
+                              if (response.data != null) {
+                                FormHelper.showSimpleAlertDialog(
+                                  context,
+                                  Config.appName,
+                                  "Add Details Successful. Please look at the result in your Info section",
+                                  "OK",
+                                  () {
+                                    Navigator.of(context).pushReplacementNamed(
+                                        HomeScreen.routeName);
+                                  },
+                                );
+                              } else {
+                                FormHelper.showSimpleAlertDialog(
+                                  context,
+                                  Config.appName,
+                                  "Invalid Details !!",
+                                  "OK",
+                                  () {
+                                    Navigator.of(context).pop();
+                                  },
+                                );
+                              }
+                            },
+                          );
+                        }
+                      },
                     ),
                   ),
                 ),

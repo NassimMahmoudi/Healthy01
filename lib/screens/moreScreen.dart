@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:healthy01/const/colors.dart';
 import 'package:healthy01/screens/aboutScreen.dart';
-import 'package:healthy01/screens/inboxScreen.dart';
-import 'package:healthy01/screens/myOrderScreen.dart';
+import 'package:healthy01/screens/login.dart';
 import 'package:healthy01/screens/notificationScreen.dart';
 import 'package:healthy01/screens/paymentScreen.dart';
 import 'package:healthy01/utils/helper.dart';
@@ -29,8 +28,18 @@ class MoreScreen extends StatelessWidget {
                         "More",
                         style: Helper.getTheme(context).headline5,
                       ),
-                      Image.asset(
-                        Helper.getAssetName("cart.png", "virtual"),
+                      Material(
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushReplacementNamed(LoginScreen.routeName);
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20.0),
+                            child: Image.asset(Helper.getAssetName(
+                                "user_filled.png", "virtual")),
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -51,18 +60,6 @@ class MoreScreen extends StatelessWidget {
                   ),
                   MoreCard(
                     image: Image.asset(
-                      Helper.getAssetName("shopping_bag.png", "virtual"),
-                    ),
-                    name: "My Orders",
-                    handler: () {
-                      Navigator.of(context).pushNamed(MyOrderScreen.routeName);
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  MoreCard(
-                    image: Image.asset(
                       Helper.getAssetName("noti.png", "virtual"),
                     ),
                     name: "Notifications",
@@ -70,18 +67,6 @@ class MoreScreen extends StatelessWidget {
                     handler: () {
                       Navigator.of(context)
                           .pushNamed(NotificationScreen.routeName);
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  MoreCard(
-                    image: Image.asset(
-                      Helper.getAssetName("mail.png", "virtual"),
-                    ),
-                    name: "Inbox",
-                    handler: () {
-                      Navigator.of(context).pushNamed(InboxScreen.routeName);
                     },
                   ),
                   SizedBox(

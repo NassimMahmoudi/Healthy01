@@ -6,7 +6,6 @@ import 'package:healthy01/config.dart';
 import 'package:healthy01/const/colors.dart';
 import 'package:healthy01/models/register_request_model.dart';
 import 'package:healthy01/screens/homeScreen.dart';
-import 'package:healthy01/screens/home_screen.dart';
 import 'package:healthy01/screens/login.dart';
 import 'package:healthy01/services/api_service.dart';
 import 'package:healthy01/utils/helper.dart';
@@ -312,14 +311,14 @@ class _registerScreenState extends State<RegisterScreen> {
                                     () {
                                       Navigator.of(context)
                                           .pushReplacementNamed(
-                                              OnboardingSecondScreen.routeName);
+                                              LoginScreen.routeName);
                                     },
                                   );
                                 } else {
                                   FormHelper.showSimpleAlertDialog(
                                     context,
                                     Config.appName,
-                                    "Invalid Username/Password !!",
+                                    "Invalid Informations !!",
                                     "OK",
                                     () {
                                       Navigator.of(context).pop();

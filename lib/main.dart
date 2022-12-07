@@ -5,13 +5,11 @@ import 'package:healthy01/screens/checkoutScreen.dart';
 import 'package:healthy01/screens/dessertScreen.dart';
 import 'package:healthy01/screens/forgetPwScreen.dart';
 import 'package:healthy01/screens/homeScreen.dart';
-import 'package:healthy01/screens/inboxScreen.dart';
 import 'package:healthy01/screens/individualItem.dart';
 import 'package:healthy01/screens/introScreen.dart';
 import 'package:healthy01/screens/login.dart';
 import 'package:healthy01/screens/menuScreen.dart';
 import 'package:healthy01/screens/moreScreen.dart';
-import 'package:healthy01/screens/myOrderScreen.dart';
 import 'package:healthy01/screens/newPwScreen.dart';
 import 'package:healthy01/screens/notificationScreen.dart';
 import 'package:healthy01/screens/offerScreen.dart';
@@ -113,8 +111,6 @@ class App extends StatelessWidget {
         PaymentScreen.routeName: (context) => PaymentScreen(),
         NotificationScreen.routeName: (context) => NotificationScreen(),
         AboutScreen.routeName: (context) => AboutScreen(),
-        InboxScreen.routeName: (context) => InboxScreen(),
-        MyOrderScreen.routeName: (context) => MyOrderScreen(),
         CheckoutScreen.routeName: (context) => CheckoutScreen(),
         ChangeAddressScreen.routeName: (context) => ChangeAddressScreen(),
       },

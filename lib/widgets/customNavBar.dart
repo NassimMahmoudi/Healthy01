@@ -1,5 +1,6 @@
 import 'package:clip_shadow/clip_shadow.dart';
 import 'package:flutter/material.dart';
+import 'package:healthy01/screens/onboarding_second_screen.dart';
 
 import '../const/colors.dart';
 import '../screens/homeScreen.dart';
@@ -73,9 +74,9 @@ class CustomNavBar extends StatelessWidget {
                                   Helper.getAssetName("more.png", "virtual"),
                                 ),
                           menu
-                              ? Text("Menu",
+                              ? Text("Info",
                                   style: TextStyle(color: AppColor.orange))
-                              : Text("Menu"),
+                              : Text("Info"),
                         ],
                       ),
                     ),
@@ -98,9 +99,9 @@ class CustomNavBar extends StatelessWidget {
                                   Helper.getAssetName("bag.png", "virtual"),
                                 ),
                           offer
-                              ? Text("Offers",
+                              ? const Text("Offers",
                                   style: TextStyle(color: AppColor.orange))
-                              : Text("Offers"),
+                              : const Text("Offers"),
                         ],
                       ),
                     ),

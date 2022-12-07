@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healthy01/const/colors.dart';
+import 'package:healthy01/screens/login.dart';
 import 'package:healthy01/utils/helper.dart';
 import 'package:healthy01/widgets/customNavBar.dart';
 
@@ -31,8 +32,18 @@ class NotificationScreen extends StatelessWidget {
                         style: Helper.getTheme(context).headline5,
                       ),
                     ),
-                    Image.asset(
-                      Helper.getAssetName("cart.png", "virtual"),
+                    Material(
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushReplacementNamed(LoginScreen.routeName);
+                        },
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: Image.asset(Helper.getAssetName(
+                              "user_filled.png", "virtual")),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -40,48 +51,49 @@ class NotificationScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              NotiCard(
+              const NotiCard(
                 title: "Your order has been picked up",
                 time: "Now",
               ),
-              NotiCard(
+              const NotiCard(
                 title: "Your order has been delivered",
                 time: "1 h ago",
                 color: AppColor.placeholderBg,
               ),
-              NotiCard(
+              const NotiCard(
                 title: "Lorem ipsum dolor sit amet, consectetur",
                 time: "3 h ago",
               ),
-              NotiCard(
+              const NotiCard(
                 title: "Lorem ipsum dolor sit amet, consectetur",
                 time: "5 h ago",
               ),
-              NotiCard(
+              const NotiCard(
                 title: "Lorem ipsum dolor sit amet, consectetur",
                 time: "05 Sep 2020",
                 color: AppColor.placeholderBg,
               ),
-              NotiCard(
+              const NotiCard(
                 title: "Lorem ipsum dolor sit amet, consectetur",
                 time: "12 Aug 2020",
                 color: AppColor.placeholderBg,
               ),
-              NotiCard(
+              const NotiCard(
                 title: "Lorem ipsum dolor sit amet, consectetur",
                 time: "20 Jul 2020",
               ),
-              NotiCard(
+              const NotiCard(
                 title: "Lorem ipsum dolor sit amet, consectetur",
                 time: "12 Jul 2020",
               ),
             ],
           )),
-          Positioned(
+          const Positioned(
               bottom: 0,
               left: 0,
               child: CustomNavBar(
                 menu: true,
+                key: null,
               ))
         ],
       ),
@@ -112,37 +124,39 @@ class NotiCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: _color,
         border: Border(
-          bottom: BorderSide(
+          bottom: const BorderSide(
             color: AppColor.placeholder,
             width: 0.5,
           ),
         ),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CircleAvatar(
-            backgroundColor: AppColor.orange,
-            radius: 5,
-          ),
-          SizedBox(
-            width: 20,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                _title,
-                style: TextStyle(
-                  color: AppColor.primary,
+      child: SingleChildScrollView(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const CircleAvatar(
+              backgroundColor: AppColor.orange,
+              radius: 5,
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  _title,
+                  style: const TextStyle(
+                    color: AppColor.primary,
+                  ),
                 ),
-              ),
-              Text(_time),
-            ],
-          )
-        ],
+                Text(_time),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

@@ -3,5 +3,6 @@ class Config {
   static const String appURL = "localhost:3000";
   static const String loginAPI = "/api/user/login";
   static const String registerAPI = "/api/user/register";
+  static const String detailsAPI = "/api/user/details";
   static const String userProfileAPI = "/api/user/user-profile";
 }
