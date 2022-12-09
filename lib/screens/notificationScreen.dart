@@ -14,6 +14,9 @@ class NotificationScreen extends StatelessWidget {
           SafeArea(
               child: Column(
             children: [
+              const SizedBox(
+                height: 20,
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Row(

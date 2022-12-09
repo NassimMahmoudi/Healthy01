@@ -16,6 +16,9 @@ class AboutScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Column(
                 children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
                   Row(
                     children: [
                       IconButton(
